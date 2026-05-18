@@ -1,0 +1,99 @@
+=====================================
+  BOOKLEAF PORTAL - QUICK START GUIDE
+=====================================
+
+REQUIREMENTS:
+- Node.js v18+ (https://nodejs.org)
+- MongoDB running locally on port 27017
+  OR install from: https://www.mongodb.com/try/download/community
+
+STEP 1 - Add your Gemini API Key:
+  Open: backend/.env
+  Change: GEMINI_API_KEY=your_gemini_api_key_here
+  To:     GEMINI_API_KEY=AIza...your_actual_key...
+  
+  Get free key at: https://aistudio.google.com/app/apikey
+  (AI features work without it too - admin can write manually)
+
+STEP 2 - Install & Seed (first time only):
+  Windows: Double-click setup.bat
+  Mac/Linux: chmod +x setup.sh && ./setup.sh
+
+STEP 3 - Start the app:
+  Windows: Double-click start-dev.bat
+  Mac/Linux: chmod +x start-dev.sh && ./start-dev.sh
+
+  OR manually in two terminals:
+    Terminal 1: cd backend  && npm run dev
+    Terminal 2: cd frontend && npm start
+
+STEP 4 - Open browser:
+  http://localhost:3000
+
+=====================================
+  LOGIN CREDENTIALS
+=====================================
+
+ADMIN:
+  Email:    admin@bookleaf.com
+  Password: admin123
+
+AUTHORS (all use password: author123):
+  priya.sharma@email.com      - 2 books
+  rohit.kapoor@email.com      - 2 books (bestseller!)
+  ananya.reddy@email.com      - 1 book
+  vikram.joshi@email.com      - 2 books
+  meera.nair@email.com        - 2 books
+  arjun.malhotra@email.com    - 1 book
+  sneha.kulkarni@email.com    - 3 books (1 in production)
+  farhan.sheikh@email.com     - 1 book
+  kavita.deshmukh@email.com   - 2 books (1 in production)
+  diya.chatterjee@email.com   - 2 books
+
+=====================================
+  HOW TO TEST AI FEATURES
+=====================================
+
+1. Login as any author
+2. Go to "New Support Query"
+3. Select a book and write a query like:
+   "I haven't received my royalty for 3 months"
+4. Submit the ticket
+
+5. Login as admin (admin@bookleaf.com)
+6. Open the ticket in the queue
+7. Click "Generate Draft" - Gemini will draft a response
+8. Edit if needed, then "Send Response"
+
+9. Login back as author - see the response appear in real-time!
+
+=====================================
+  PROJECT STRUCTURE
+=====================================
+
+bookleaf/
+├── backend/
+│   ├── config/
+│   │   ├── gemini.js      <- Gemini AI integration
+│   │   └── seed.js        <- Database seeder
+│   ├── middleware/
+│   │   └── authMiddleware.js
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Book.js
+│   │   └── Ticket.js
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── bookRoutes.js
+│   │   ├── ticketRoutes.js
+│   │   └── adminRoutes.js
+│   ├── server.js
+│   └── .env               <- PUT YOUR GEMINI KEY HERE
+│
+└── frontend/
+    └── src/
+        ├── context/       <- Auth + Socket context
+        ├── pages/
+        │   ├── author/    <- Author portal pages
+        │   └── admin/     <- Admin portal pages
+        └── App.js
